@@ -10,6 +10,13 @@ st.title("🪙 Silver Retail Sentiment Dashboard")
 
 # Load data
 scores = pd.read_csv("scores.csv")
+
+cot = pd.read_csv("cot_data.csv")
+latest_cot = cot.iloc[-1]
+
+st.sidebar.subheader("📊 COT – Live data")
+st.sidebar.write(f"Retail net: {int(latest_cot['retail_net'])}")
+st.sidebar.write(f"Open interest: {int(latest_cot['open_interest'])}")
 latest = scores.iloc[-1]
 
 # Header
