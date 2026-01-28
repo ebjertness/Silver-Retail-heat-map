@@ -125,7 +125,11 @@ with c1:
     )
 
 with c2:
-    st.metric("COT score", latest["cot_score"])
+    st.metric(
+        "COT score (live)",
+        cot_score_live,
+        delta=f"Z-score: {latest_z:.2f}"
+    )
 
 with c3:
     st.metric("PSLV score", latest["pslv_score"])
