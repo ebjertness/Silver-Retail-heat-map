@@ -118,11 +118,16 @@ cot_score_live = cot_score_from_z(latest_z)
 c1, c2, c3 = st.columns([2, 1, 1])
 
 with c1:
-    st.metric(
-        "🔥 Retail Heat Index",
-        int(latest["total"]),
-        delta=int(latest["change"])
-    )
+    total_heat = int(
+    0.30 * cot_score_live +
+    0.70 * latest["total"]
+)
+
+st.metric(
+    "🔥 Retail Heat Index",
+    total_heat,
+    delta="COT-adjusted"
+)
 
 with c2:
     st.metric(
