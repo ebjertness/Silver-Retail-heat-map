@@ -25,17 +25,35 @@ def load_cot_data():
     file_name = z.namelist()[0]
 
     df = pd.read_csv(z.open(file_name))
-    silver = df[df["Market_and_Exchange_Names"].str.contains(
-        "SILVER - COMMODITY EXCHANGE INC", na=False
-    )]
 
-    # Handle different COT column naming conventions
-if "NonRept_Long_All" in silver.columns:
-    long_col = "NonRept_Long_All"
-    short_col = "NonRept_Short_All"
-else:
-    long_col = "NonRept_Long"
-    short_col = "NonRept_Short"
+    silver = df[
+        df["Market_and_Exchange_Names"].str.contains(
+            "SILVER - COMMODITY EXCHANGE INC", na=False
+        )
+    ]
+
+    if "NonRept_Long_All" in silver.columns:
+        long_col = "NonRept_Long_All"
+        short_col = "NonRept_Short_All"
+    else:
+        long_col = "NonRept_Long"
+        short_col = "NonRept_Short"
+
+    silver["retail_net"] = silver[long_col] - silver[short_col]
+
+    out = silver[
+        [
+            "Report_Date_as_YYYY-MM-DD",
+            "retail_net",
+            "Open_Interest_All"
+        ]
+    ]
+
+    out.columns = ["date", "retail_net", "open_interest"]
+    out["date"] = pd.to_datetime(out["date"])
+
+    out.to_csv("cot_data.csv", index=False)
+    return out
 
 silver["retail_net"] = silver[long_col] - silver[short_col]
     )
