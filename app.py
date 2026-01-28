@@ -50,7 +50,7 @@ def load_cot_data():
             break
 
     if long_col is None:
-    st.warning(
+     st.warning(
         "Could not auto-detect non-reportable columns in COT data. "
         "Using fallback based on column name search."
     )
