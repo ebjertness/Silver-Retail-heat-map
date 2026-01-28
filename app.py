@@ -33,27 +33,27 @@ def load_cot_data():
         )
     ]
 
-    # Robust detection of non-reportable columns
     possible_pairs = [
-    ("NonRept_Long_All", "NonRept_Short_All"),
-    ("NonRept_Long", "NonRept_Short"),
-    ("Non_Reportable_Long_All", "Non_Reportable_Short_All"),
-    ("Non_Reportable_Long", "Non_Reportable_Short"),
-]
+        ("NonRept_Long_All", "NonRept_Short_All"),
+        ("NonRept_Long", "NonRept_Short"),
+        ("Non_Reportable_Long_All", "Non_Reportable_Short_All"),
+        ("Non_Reportable_Long", "Non_Reportable_Short"),
+    ]
 
-long_col = None
-short_col = None
+    long_col = None
+    short_col = None
 
-for lc, sc in possible_pairs:
-    if lc in silver.columns and sc in silver.columns:
-        long_col = lc
-        short_col = sc
-        break
+    for lc, sc in possible_pairs:
+        if lc in silver.columns and sc in silver.columns:
+            long_col = lc
+            short_col = sc
+            break
 
-if long_col is None:
-    raise ValueError(f"Could not find non-reportable columns. Available columns: {list(silver.columns)}")
-
-    silver["retail_net"] = silver[long_col] - silver[short_col]
+    if long_col is None:
+        raise ValueError(
+            f"Could not find non-reportable columns. "
+            f"Available columns: {list(silver.columns)}"
+        )
 
     silver["retail_net"] = silver[long_col] - silver[short_col]
 
