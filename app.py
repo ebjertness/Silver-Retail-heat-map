@@ -115,15 +115,10 @@ cot_score_live = cot_score_from_z(latest_z)
 c1, c2, c3 = st.columns([2, 1, 1])
 
 with c1:
-    total_heat = int(
-    0.30 * cot_score_live +
-    0.70 * latest["total"]
-)
-
-st.metric(
+    st.metric(
     "🔥 Retail Heat Index",
-    total_heat,
-    delta="COT-adjusted"
+    cot_score_live,
+    delta="Driven by COT (live)"
 )
 
 with c2:
@@ -163,5 +158,3 @@ with m4:
 st.divider()
 
 # ---------------- HISTORY ----------------
-st.subheader("📉 Retail Heat Index – History")
-st.line_chart(scores.set_index("date")[["total"]])
