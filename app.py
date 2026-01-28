@@ -132,7 +132,7 @@ with c3:
     st.metric("PSLV score", "—")
     st.caption("Coming next")
 
-st.caption(f"Last updated: {latest['date']}")
+st.caption(f"Last updated (COT): {latest_cot['date'].date()}")
 
 st.divider()
 
