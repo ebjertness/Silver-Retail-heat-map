@@ -34,7 +34,7 @@ def load_cot_data():
     ]
 
     # Robust detection of non-reportable columns
-possible_pairs = [
+    possible_pairs = [
     ("NonRept_Long_All", "NonRept_Short_All"),
     ("NonRept_Long", "NonRept_Short"),
     ("Non_Reportable_Long_All", "Non_Reportable_Short_All"),
