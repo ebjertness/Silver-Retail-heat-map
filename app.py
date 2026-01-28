@@ -50,7 +50,7 @@ latest_cot = cot.iloc[-1]
 
 # ---------- DEMO SCORES ----------
 scores = pd.read_csv("scores.csv")
-latest = scores.iloc[-1]import streamlit as st
+latest = scores.iloc[-1]
 import pandas as pd
 
 st.set_page_config(
