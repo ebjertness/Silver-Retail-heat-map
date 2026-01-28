@@ -53,9 +53,9 @@ for lc, sc in possible_pairs:
 if long_col is None:
     raise ValueError(f"Could not find non-reportable columns. Available columns: {list(silver.columns)}")
 
-silver["retail_net"] = silver[long_col] - silver[short_col]
+    silver["retail_net"] = silver[long_col] - silver[short_col]
 
-silver["retail_net"] = silver[long_col] - silver[short_col]
+    silver["retail_net"] = silver[long_col] - silver[short_col]
 
     out = silver[
         [
