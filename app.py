@@ -129,7 +129,8 @@ with c2:
     st.caption(f"Z-score (52w): {latest_z:.2f}")
 
 with c3:
-    st.metric("PSLV score", latest["pslv_score"])
+    st.metric("PSLV score", "—")
+    st.caption("Coming next")
 
 st.caption(f"Last updated: {latest['date']}")
 
