@@ -50,10 +50,21 @@ def load_cot_data():
             break
 
     if long_col is None:
-        raise ValueError(
-            f"Could not find non-reportable columns. "
-            f"Available columns: {list(silver.columns)}"
-        )
+    st.warning(
+        "Could not auto-detect non-reportable columns in COT data. "
+        "Using fallback based on column name search."
+    )
+
+    # Fallback: try any column containing 'Non' and 'Long/Short'
+    long_candidates = [c for c in silver.columns if "Long" in c and "Non" in c]
+    short_candidates = [c for c in silver.columns if "Short" in c and "Non" in c]
+
+    if long_candidates and short_candidates:
+        long_col = long_candidates[0]
+        short_col = short_candidates[0]
+    else:
+        st.error("COT column detection failed. Check CFTC format.")
+        return pd.DataFrame(columns=["date", "retail_net", "open_interest"])
 
     silver["retail_net"] = silver[long_col] - silver[short_col]
 
