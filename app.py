@@ -85,9 +85,6 @@ def load_cot_data():
 cot = load_cot_data()
 latest_cot = cot.iloc[-1]
 
-# ---------------- SCORES (TEMP) ----------------
-scores = pd.read_csv("scores.csv")
-latest = scores.iloc[-1]
 # ---------------- COT SCORING ----------------
 cot = cot.copy()
 cot["retail_pct_oi"] = cot["retail_net"] / cot["open_interest"]
