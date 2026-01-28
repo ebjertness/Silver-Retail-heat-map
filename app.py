@@ -88,6 +88,31 @@ latest_cot = cot.iloc[-1]
 # ---------------- SCORES (TEMP) ----------------
 scores = pd.read_csv("scores.csv")
 latest = scores.iloc[-1]
+# ---------------- COT SCORING ----------------
+cot = cot.copy()
+cot["retail_pct_oi"] = cot["retail_net"] / cot["open_interest"]
+
+window = 52  # weeks
+cot["mean"] = cot["retail_pct_oi"].rolling(window).mean()
+cot["std"] = cot["retail_pct_oi"].rolling(window).std()
+
+cot["z_score"] = (cot["retail_pct_oi"] - cot["mean"]) / cot["std"]
+
+latest_z = cot.iloc[-1]["z_score"]
+
+def cot_score_from_z(z):
+    if z < -1:
+        return 5
+    elif z < 0.5:
+        return 10
+    elif z < 1.0:
+        return 15
+    elif z < 1.5:
+        return 20
+    else:
+        return 25
+
+cot_score_live = cot_score_from_z(latest_z)
 
 # ---------------- HEADER ----------------
 c1, c2, c3 = st.columns([2, 1, 1])
