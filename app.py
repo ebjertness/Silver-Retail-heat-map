@@ -55,7 +55,7 @@ if long_col is None:
 
 silver["retail_net"] = silver[long_col] - silver[short_col]
 
-    silver["retail_net"] = silver[long_col] - silver[short_col]
+silver["retail_net"] = silver[long_col] - silver[short_col]
 
     out = silver[
         [
