@@ -29,8 +29,15 @@ def load_cot_data():
         "SILVER - COMMODITY EXCHANGE INC", na=False
     )]
 
-    silver["retail_net"] = (
-        silver["NonRept_Long_All"] - silver["NonRept_Short_All"]
+    # Handle different COT column naming conventions
+if "NonRept_Long_All" in silver.columns:
+    long_col = "NonRept_Long_All"
+    short_col = "NonRept_Short_All"
+else:
+    long_col = "NonRept_Long"
+    short_col = "NonRept_Short"
+
+silver["retail_net"] = silver[long_col] - silver[short_col]
     )
 
     out = silver[[
