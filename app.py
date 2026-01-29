@@ -133,7 +133,7 @@ with c3:
 
 st.caption(f"Last updated (COT): {latest_cot['date'].date()}")
 
-st.divider()
+st.markdown("---")
 
 # ---------------- MODULES ----------------
 m1, m2, m3, m4 = st.columns(4)
@@ -155,6 +155,6 @@ with m4:
     st.subheader("📈 Options")
     st.progress(latest["options_score"] / 25)
 
-st.divider()
+st.markdown("---")
 
 # ---------------- HISTORY ----------------
