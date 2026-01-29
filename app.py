@@ -17,8 +17,6 @@ st.title("🪙 Silver Retail Sentiment Dashboard")
 # ---------------- COT DATA ----------------
 @st.cache_data(ttl=43200)
 def load_cot_data():
-    if os.path.exists("cot_data.csv"):
-        return pd.read_csv("cot_data.csv")
 
     url = "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2024.zip"
     r = requests.get(url)
