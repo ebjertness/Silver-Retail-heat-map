@@ -15,7 +15,7 @@ st.set_page_config(
 st.title("🪙 Silver Retail Sentiment Dashboard")
 
 # ---------------- COT DATA ----------------
-@st.cache_data(ttl=43200)
+@st.cache_data(ttl=86400, show_spinner=False)
 def load_cot_data():
 
     url = "https://www.cftc.gov/files/dea/history/fut_disagg_txt_2024.zip"
@@ -24,7 +24,7 @@ def load_cot_data():
     z = zipfile.ZipFile(BytesIO(r.content))
     file_name = z.namelist()[0]
 
-    df = pd.read_csv(z.open(file_name))
+    df = pd.read_csv(z.open(file_name), low_memory=False)
 
     silver = df[
         df["Market_and_Exchange_Names"].str.contains(
