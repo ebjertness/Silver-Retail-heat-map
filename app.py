@@ -80,7 +80,7 @@ def load_cot_data():
     out.columns = ["date", "retail_net", "open_interest"]
     out["date"] = pd.to_datetime(out["date"])
 
-    out.to_csv("cot_data.csv", index=False)
+    # out.to_csv("cot_data.csv", index=False)
     return out
 
 cot = load_cot_data()
