@@ -15,6 +15,7 @@ st.set_page_config(
 st.title("🪙 Silver Retail Sentiment Dashboard")
 
 # ---------------- COT DATA ----------------
+@st.cache_data(ttl=43200)
 def load_cot_data():
     if os.path.exists("cot_data.csv"):
         return pd.read_csv("cot_data.csv")
