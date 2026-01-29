@@ -131,7 +131,7 @@ with c3:
     st.metric("PSLV score", "—")
     st.caption("Coming next")
 
-st.caption(f"Last updated (COT): {latest_cot['date'].date()}")
+st.caption(f"Last updated (COT): {latest_cot['date']}")
 
 st.markdown("---")
 
