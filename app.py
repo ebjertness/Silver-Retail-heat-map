@@ -138,10 +138,21 @@ pslv_score_live = pslv_score_from_flow(oz_change)
 c1, c2, c3 = st.columns([2, 1, 1])
 
 with c1:
-    st.metric(
+    total_heat = int(
+    0.6 * cot_score_live +
+    0.4 * pslv_score_live
+)
+
+st.metric(
+    total_heat = int(
+    0.6 * cot_score_live +
+    0.4 * pslv_score_live
+)
+
+st.metric(
     "🔥 Retail Heat Index",
-    cot_score_live,
-    delta="Driven by COT (live)"
+    total_heat,
+    delta="COT + PSLV"
 )
 
 with c2:
