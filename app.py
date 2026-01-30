@@ -49,10 +49,6 @@ def load_cot_data():
             break
 
     if long_col is None:
-     st.warning(
-        "Could not auto-detect non-reportable columns in COT data. "
-        "Using fallback based on column name search."
-    )
 
     # Fallback: try any column containing 'Non' and 'Long/Short'
     long_candidates = [c for c in silver.columns if "Long" in c and "Non" in c]
