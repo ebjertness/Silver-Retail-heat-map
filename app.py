@@ -170,7 +170,11 @@ with m1:
 
 with m2:
     st.subheader("🪙 PSLV")
-    st.caption("Module coming next")
+    st.metric(
+        "Flow score",
+        pslv_score_live,
+        delta=f"{oz_change:,.0f} oz"
+    )
 
 with m3:
     st.subheader("🧱 Physical")
