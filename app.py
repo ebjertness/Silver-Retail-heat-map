@@ -136,24 +136,25 @@ st.caption(f"Last updated (COT): {latest_cot['date']}")
 st.markdown("---")
 
 # ---------------- MODULES ----------------
+# ---------------- MODULES ----------------
 m1, m2, m3, m4 = st.columns(4)
 
 with m1:
-    st.subheader("📊 COT (Live)")
-    st.write(f"Retail net: {int(latest_cot['retail_net'])}")
-    st.write(f"Open interest: {int(latest_cot['open_interest'])}")
+    st.subheader("📊 COT")
+    st.caption("Live")
+    st.metric("Retail Z-score", f"{latest_z:.2f}")
 
 with m2:
     st.subheader("🪙 PSLV")
-    st.progress(latest["pslv_score"] / 25)
+    st.caption("Module coming next")
 
 with m3:
     st.subheader("🧱 Physical")
-    st.progress(latest["physical_score"] / 25)
+    st.caption("Module coming later")
 
 with m4:
     st.subheader("📈 Options")
-    st.progress(latest["options_score"] / 25)
+    st.caption("Module coming later")
 
 st.markdown("---")
 
