@@ -104,7 +104,36 @@ def cot_score_from_z(z):
         return 25
 
 cot_score_live = cot_score_from_z(latest_z)
+# ---------------- PSLV DATA ----------------
+@st.cache_data(ttl=3600)
+def load_pslv():
+    df = pd.read_csv("pslv_data.csv", parse_dates=["date"])
+    return df
 
+pslv = load_pslv()
+
+if len(pslv) >= 2:
+    latest_pslv = pslv.iloc[-1]
+    prev_pslv = pslv.iloc[-2]
+
+    oz_change = latest_pslv["silver_oz"] - prev_pslv["silver_oz"]
+else:
+    latest_pslv = pslv.iloc[-1]
+    oz_change = 0
+
+def pslv_score_from_flow(oz):
+    if oz < 0:
+        return 5
+    elif oz < 500_000:
+        return 10
+    elif oz < 2_000_000:
+        return 15
+    elif oz < 5_000_000:
+        return 20
+    else:
+        return 25
+
+pslv_score_live = pslv_score_from_flow(oz_change)
 # ---------------- HEADER ----------------
 c1, c2, c3 = st.columns([2, 1, 1])
 
