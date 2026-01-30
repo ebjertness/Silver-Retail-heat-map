@@ -50,8 +50,8 @@ def load_cot_data():
 
     if long_col is None:
      # Fallback: try any column containing 'Non' and 'Long/Short'
-    long_candidates = [c for c in silver.columns if "Long" in c and "Non" in c]
-    short_candidates = [c for c in silver.columns if "Short" in c and "Non" in c]
+        long_candidates = [c for c in silver.columns if "Long" in c and "Non" in c]
+        short_candidates = [c for c in silver.columns if "Short" in c and "Non" in c]
 
     if long_candidates and short_candidates:
         long_col = long_candidates[0]
