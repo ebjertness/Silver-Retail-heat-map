@@ -144,7 +144,7 @@ with c1:
 )
 
 st.metric(
-    total_heat = int(
+    total_heat = int
     0.6 * cot_score_live +
     0.4 * pslv_score_live
 )
