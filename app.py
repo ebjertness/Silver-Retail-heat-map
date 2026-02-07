@@ -5,6 +5,8 @@ import zipfile
 from io import BytesIO
 from datetime import datetime
 import os
+import yfinance as yf
+from datetime import date
 
 # ---------------- PAGE SETUP ----------------
 st.set_page_config(
