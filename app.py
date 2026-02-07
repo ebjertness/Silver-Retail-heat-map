@@ -148,6 +148,41 @@ total_heat = int(
     0.4 * pslv_score_live
 )
 
+# ---------------- INTERPRETATION ENGINE ----------------
+
+def interpret_market(cot_score, pslv_score, heat):
+
+    if heat < 8:
+        phase = "early participation"
+    elif heat < 15:
+        phase = "normal involvement"
+    elif heat < 22:
+        phase = "crowding building"
+    else:
+        phase = "possible late-stage enthusiasm"
+
+    if pslv_score > cot_score:
+        driver = "ETF flows dominate futures positioning"
+    elif cot_score > pslv_score:
+        driver = "futures positioning leads ETF demand"
+    else:
+        driver = "futures and ETF activity are aligned"
+
+    return f"""
+Retail activity suggests **{phase}**.
+
+Main driver: **{driver}**.
+
+This environment typically reflects expanding interest, 
+but not necessarily a terminal blow-off.
+"""
+
+interpretation_text = interpret_market(
+    cot_score_live,
+    pslv_score_live,
+    total_heat
+)
+
 st.metric(
     "🔥 Retail Heat Index",
     total_heat,
