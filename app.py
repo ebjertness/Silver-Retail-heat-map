@@ -298,7 +298,11 @@ with m2:
 
 with m3:
     st.subheader("🧱 Physical")
-    st.caption("Module coming later")
+    st.metric(
+        "Premium",
+        f"{premium:.1f}%"
+    )
+    st.caption(f"Z-score: {latest_physical_z:.2f}")
 
 with m4:
     st.subheader("📈 Options")
