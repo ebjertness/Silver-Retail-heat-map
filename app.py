@@ -154,6 +154,31 @@ def pslv_score_from_flow(oz):
         return 25
 
 pslv_score_live = pslv_score_from_flow(oz_change)
+# ---------------- PHYSICAL DATA ----------------
+
+@st.cache_data(ttl=3600)
+def load_physical():
+    df = pd.read_csv("physical_data.csv", parse_dates=["date"])
+    return df
+
+physical = load_physical()
+latest_physical = physical.iloc[-1]
+
+premium = latest_physical["premium_pct"]
+
+def physical_score_from_premium(p):
+    if p < 5:
+        return 5
+    elif p < 10:
+        return 10
+    elif p < 20:
+        return 15
+    elif p < 35:
+        return 20
+    else:
+        return 25
+
+physical_score_live = physical_score_from_premium(premium)
 # ---------------- PSLV FLOW NORMALIZATION ----------------
 
 pslv = pslv.copy()
