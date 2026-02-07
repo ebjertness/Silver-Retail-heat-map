@@ -189,6 +189,10 @@ st.metric(
     delta="COT + PSLV"
 )
 
+st.markdown("---")
+st.subheader("🧠 Market interpretation")
+st.markdown(interpretation_text)
+
 with c2:
     st.metric(
         "COT score (live)",
