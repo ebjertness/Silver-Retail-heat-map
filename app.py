@@ -154,6 +154,19 @@ def pslv_score_from_flow(oz):
         return 25
 
 pslv_score_live = pslv_score_from_flow(oz_change)
+# ---------------- PSLV FLOW NORMALIZATION ----------------
+
+pslv = pslv.copy()
+pslv["flow"] = pslv["silver_oz"].diff()
+
+window = 30  # dager, juster senere
+pslv["mean"] = pslv["flow"].rolling(window).mean()
+pslv["std"] = pslv["flow"].rolling(window).std()
+
+pslv["z"] = (pslv["flow"] - pslv["mean"]) / pslv["std"]
+
+latest_pslv_z = pslv.iloc[-1]["z"]
+
 # ---------------- HEADER ----------------
 c1, c2, c3 = st.columns([2, 1, 1])
 
@@ -244,6 +257,7 @@ with m2:
         pslv_score_live,
         delta=f"{oz_change:,.0f} oz"
     )
+    st.caption(f"Flow Z-score: {latest_pslv_z:.2f}")
 
 with m3:
     st.subheader("🧱 Physical")
