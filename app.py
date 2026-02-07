@@ -179,6 +179,18 @@ def physical_score_from_premium(p):
         return 25
 
 physical_score_live = physical_score_from_premium(premium)
+# tempo vs historikk
+physical = physical.copy()
+physical["mean"] = physical["premium_pct"].rolling(30).mean()
+physical["std"] = physical["premium_pct"].rolling(30).std()
+
+physical["z"] = (
+    (physical["premium_pct"] - physical["mean"]) /
+    physical["std"]
+)
+
+latest_physical_z = physical.iloc[-1]["z"]
+
 # ---------------- PSLV FLOW NORMALIZATION ----------------
 
 pslv = pslv.copy()
