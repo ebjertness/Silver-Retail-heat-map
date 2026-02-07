@@ -207,15 +207,10 @@ latest_pslv_z = pslv.iloc[-1]["z"]
 # ---------------- HEADER ----------------
 c1, c2, c3 = st.columns([2, 1, 1])
 
-with c1:
-    total_heat = int(
-    0.6 * cot_score_live +
-    0.4 * pslv_score_live
-)
-
 total_heat = int(
-    0.6 * cot_score_live +
-    0.4 * pslv_score_live
+    0.5 * cot_score_live +
+    0.3 * pslv_score_live +
+    0.2 * physical_score_live
 )
 
 # ---------------- INTERPRETATION ENGINE ----------------
