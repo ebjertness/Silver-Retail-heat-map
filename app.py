@@ -113,6 +113,22 @@ def load_pslv():
     return df
 
 pslv = load_pslv()
+# ---------------- PSLV AUTO UPDATE ----------------
+
+if st.button("🔄 Update PSLV now"):
+    ticker = yf.Ticker("PSLV")
+    info = ticker.fast_info
+
+    new_row = {
+        "date": pd.to_datetime(date.today()),
+        "shares_outstanding": info.get("sharesOutstanding", None),
+        "silver_oz": info.get("sharesOutstanding", 0)  # proxy
+    }
+
+    pslv = pd.concat([pslv, pd.DataFrame([new_row])])
+    pslv.to_csv("pslv_data.csv", index=False)
+
+    st.success("PSLV updated!")
 
 if len(pslv) >= 2:
     latest_pslv = pslv.iloc[-1]
