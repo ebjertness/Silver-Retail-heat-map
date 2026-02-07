@@ -130,13 +130,15 @@ if st.button("🔄 Update PSLV now"):
 
     st.success("PSLV updated!")
 
-if len(pslv) >= 2:
-    latest_pslv = pslv.iloc[-1]
-    prev_pslv = pslv.iloc[-2]
+latest_pslv = pslv.iloc[-1]
 
+# find last row with different ounces
+prev_rows = pslv[pslv["silver_oz"] != latest_pslv["silver_oz"]]
+
+if len(prev_rows) > 0:
+    prev_pslv = prev_rows.iloc[-1]
     oz_change = latest_pslv["silver_oz"] - prev_pslv["silver_oz"]
 else:
-    latest_pslv = pslv.iloc[-1]
     oz_change = 0
 
 def pslv_score_from_flow(oz):
